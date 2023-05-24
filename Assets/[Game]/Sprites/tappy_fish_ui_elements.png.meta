@@ -154,9 +154,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 808
-        y: 1515
-        width: 1037
-        height: 208
+        y: 1509
+        width: 1059
+        height: 229
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -405,9 +405,9 @@ TextureImporter:
       name: Ground
       rect:
         serializedVersion: 2
-        x: 49
+        x: 48
         y: 80
-        width: 1033
+        width: 1036
         height: 337
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
