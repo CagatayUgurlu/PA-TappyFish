@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 public class Score : MonoBehaviour
@@ -9,7 +10,8 @@ public class Score : MonoBehaviour
     Text scoreText;
     public Text panelScore;
     public Text panelHighScore;
-    // Start is called before the first frame update
+    public GameObject New;
+
     void Start()
     {
         score = 0;
@@ -32,7 +34,12 @@ public class Score : MonoBehaviour
             highScore = score;
             panelHighScore.text = score.ToString();
             PlayerPrefs.SetInt("highscore", highScore);
+            New.SetActive(true);
         }
+    }
+    public int GetScore()
+    {
+        return score;
     }
 
     // Update is called once per frame

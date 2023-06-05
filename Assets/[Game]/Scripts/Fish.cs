@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Fish : MonoBehaviour
@@ -11,6 +12,7 @@ public class Fish : MonoBehaviour
     int minAngle = -60;
 
     public Score score;
+    public ObstacleSpawner obstacleSpawner;
 
     bool touchedGround;
     public GameManager gameManager;
@@ -20,6 +22,7 @@ public class Fish : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _rb.gravityScale = 0;
         sp = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
     }
@@ -39,8 +42,19 @@ public class Fish : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && GameManager.gameOver == false)
         {
-            _rb.velocity = Vector2.zero;
-            _rb.velocity = new Vector2(_rb.velocity.x, _speed);
+            if(GameManager.gameStarted == false)
+            {
+                _rb.gravityScale = 5f;
+                _rb.velocity = Vector2.zero;
+                _rb.velocity = new Vector2(_rb.velocity.x, _speed);
+                obstacleSpawner.InstantiateObstacle();
+                gameManager.GameHasStarted();
+            }
+            else
+            {
+                _rb.velocity = Vector2.zero;
+                _rb.velocity = new Vector2(_rb.velocity.x, _speed);
+            }
         }
     }
     private void FishRotation()
@@ -74,7 +88,7 @@ public class Fish : MonoBehaviour
         }
         else if (collision.CompareTag("Column"))
         {
-            // game over
+            gameManager.GameOver();
         }
     }
 
@@ -88,12 +102,12 @@ public class Fish : MonoBehaviour
                 gameManager.GameOver();
                 GameOver();
             }
-           /* else
+            else
             {
                 GameOver();
                 // game over (fish)
             }
-            */
+            
         }
     }
 
